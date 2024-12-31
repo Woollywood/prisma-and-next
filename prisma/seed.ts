@@ -1,9 +1,22 @@
-import { Prisma, PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({ log: ['query'] });
+
+const initialPosts = [
+	{
+		title: 'Post 1',
+		slug: 'post-1',
+		content: 'Content of post 1',
+	},
+];
 
 async function main() {
-	const initialPosts = Prisma;
+	console.log('Start seeding...');
+	for (const post of initialPosts) {
+		await prisma.post.create({
+			data: post,
+		});
+	}
 }
 
 main()
