@@ -12,7 +12,9 @@ const Page: NextPage = async () => {
 		<div>
 			{hasPosts ? (
 				<>
-					<h1 className='text-2xl md:text-4xl font-medium text-center mb-12'>All Posts ({postsCount})</h1>
+					<h1 className='text-2xl md:text-4xl font-medium text-center mb-12'>
+						<span className='md:inline-block hidden'>All</span> Posts ({postsCount})
+					</h1>
 					<ul className='py-5 border-y border-white/10 space-y-2 md:space-y-4 mb-6 md:mb-12'>
 						{posts.map(({ id, slug, title, content }) => (
 							<li
