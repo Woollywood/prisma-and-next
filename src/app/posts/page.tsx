@@ -12,15 +12,15 @@ const Page: NextPage = async () => {
 		<div>
 			{hasPosts ? (
 				<>
-					<h1 className='text-4xl font-medium text-center mb-12'>All Posts ({postsCount})</h1>
-					<ul className='py-5 border-y border-white/10 space-y-1 mb-12'>
+					<h1 className='text-2xl md:text-4xl font-medium text-center mb-12'>All Posts ({postsCount})</h1>
+					<ul className='py-5 border-y border-white/10 space-y-2 md:space-y-4 mb-6 md:mb-12'>
 						{posts.map(({ id, slug, title, content }) => (
 							<li
 								key={id}
-								className='flex items-center justify-between px-5 rounded-lg transition-colors hover:bg-white/5 py-2'>
+								className='flex items-center justify-between px-5 rounded-lg transition-colors hover:bg-white/5 py-2 border border-white/10 md:border-none'>
 								<Link href={`/posts/${slug}`} className='w-full'>
-									<h2 className='text-2xl font-medium mb-2'>{title}</h2>
-									<p className='text-lg'>{content}</p>
+									<h2 className='text-xl md:text-2xl font-medium mb-2'>{title}</h2>
+									<p className='text-base md:text-lg'>{content}</p>
 								</Link>
 							</li>
 						))}

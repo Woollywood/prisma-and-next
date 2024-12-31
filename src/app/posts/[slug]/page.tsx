@@ -21,9 +21,9 @@ const Page: NextPage<Props> = async ({ params }) => {
 	return (
 		<div>
 			<div>
-				<div className='mb-24'>
-					<h1 className='text-4xl font-medium mb-6'>{post?.title}</h1>
-					<p className='text-2xl'>{post?.content}</p>
+				<div className='mb-12 md:mb-24'>
+					<h1 className='text-2xl md:text-4xl font-medium mb-2 md:mb-6'>{post?.title}</h1>
+					<p className='text-xl md:text-2xl'>{post?.content}</p>
 				</div>
 			</div>
 			<form action={editPostById} className='flex flex-col gap-2 max-w-2xl mx-auto'>

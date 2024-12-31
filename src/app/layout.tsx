@@ -26,15 +26,15 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-				<div className='container grid grid-rows-[7.5rem_1fr] min-h-screen gap-12'>
+				<div className='container grid grid-rows-[5rem_1fr] md:grid-rows-[7.5rem_1fr] min-h-[100svh] gap-12'>
 					<header className='flex items-center h-full justify-between'>
-						<Link href='/' className='text-6xl font-medium'>
+						<Link href='/' className='text-4xl md:text-6xl font-medium'>
 							Logo
 						</Link>
 						<nav>
 							<ul>
 								<li>
-									<Link href='/posts' className='text-4xl font-medium'>
+									<Link href='/posts' className='text-2xl md:text-4xl font-medium'>
 										Posts
 									</Link>
 								</li>
