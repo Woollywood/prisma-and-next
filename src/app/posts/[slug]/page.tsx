@@ -3,8 +3,17 @@ import prisma from '@/prisma/client';
 import { NextPage } from 'next';
 import { notFound } from 'next/navigation';
 
+interface Params {
+	slug: string;
+}
+
+export async function generateStaticParams(): Promise<Params[]> {
+	const posts = await prisma.post.findMany();
+	return posts.map(({ slug }) => ({ slug }));
+}
+
 interface Props {
-	params: Promise<{ slug: string }>;
+	params: Promise<Params>;
 }
 
 const Page: NextPage<Props> = async ({ params }) => {
@@ -16,7 +25,7 @@ const Page: NextPage<Props> = async ({ params }) => {
 	}
 
 	const editPostById = editPost.bind(null, post?.id || '');
-	const deletePostById = deletePost.bind(null, post?.id || '');
+	const deletePostById = deletePost.bind(null, post?.id || '', true);
 
 	return (
 		<div>

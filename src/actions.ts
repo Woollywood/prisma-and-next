@@ -35,8 +35,11 @@ export async function editPost(id: string, formData: FormData) {
 	redirect(`/posts/${slug}`);
 }
 
-export async function deletePost(id: string) {
+export async function deletePost(id: string, withRedirect = true) {
 	await prisma.post.delete({ where: { id } });
 
-	redirect('/posts');
+	if (withRedirect) {
+		redirect('/posts');
+	}
+	revalidatePath('/posts');
 }

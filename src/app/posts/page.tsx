@@ -2,6 +2,7 @@ import { createPost } from '@/actions';
 import prisma from '@/prisma/client';
 import { NextPage } from 'next';
 import Link from 'next/link';
+import { DeletePost } from './components/DeletePost';
 
 const Page: NextPage = async () => {
 	const posts = await prisma.post.findMany();
@@ -17,12 +18,15 @@ const Page: NextPage = async () => {
 					</h1>
 					<ul className='py-5 border-y border-white/10 space-y-2 md:space-y-4 mb-6 md:mb-12'>
 						{posts.map(({ id, slug, title, content }) => (
-							<li
-								key={id}
-								className='flex items-center justify-between px-5 rounded-lg transition-colors hover:bg-white/5 py-2 border border-white/10 md:border-none'>
-								<Link href={`/posts/${slug}`} className='w-full'>
-									<h2 className='text-xl md:text-2xl font-medium mb-2'>{title}</h2>
-									<p className='text-base md:text-lg'>{content}</p>
+							<li key={id}>
+								<Link
+									href={`/posts/${slug}`}
+									className='px-5 rounded-lg transition-colors hover:bg-white/5 py-2 border border-white/10 md:border-none flex items-center justify-between w-full'>
+									<div>
+										<h2 className='text-xl md:text-2xl font-medium mb-2'>{title}</h2>
+										<p className='text-base md:text-lg'>{content}</p>
+									</div>
+									<DeletePost id={id} />
 								</Link>
 							</li>
 						))}
