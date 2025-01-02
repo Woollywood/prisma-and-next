@@ -3,6 +3,8 @@ import prisma from '@/prisma/client';
 import { NextPage } from 'next';
 import { notFound } from 'next/navigation';
 
+export const revalidate = 60;
+
 interface Params {
 	slug: string;
 }

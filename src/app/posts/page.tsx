@@ -4,6 +4,8 @@ import { NextPage } from 'next';
 import Link from 'next/link';
 import { DeletePost } from './components/DeletePost';
 
+export const revalidate = 60;
+
 const Page: NextPage = async () => {
 	const posts = await prisma.post.findMany();
 	const postsCount = await prisma.post.count();
