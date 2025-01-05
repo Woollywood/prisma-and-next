@@ -1,14 +1,17 @@
 import { createPost } from '@/actions';
-import prisma from '@/prisma/client';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { DeletePost } from './components/DeletePost';
+import { Prisma } from '@prisma/client';
 
 export const revalidate = 60;
 
 const Page: NextPage = async () => {
-	const posts = await prisma.post.findMany();
-	const postsCount = await prisma.post.count();
+	const posts = (await fetch(`${process.env.BASE_URL}/api/posts`).then((data) =>
+		data.json()
+	)) as Prisma.PostCreateInput[];
+
+	const postsCount = (await fetch(`${process.env.BASE_URL}/api/posts/count`).then((data) => data.json())) as number;
 	const hasPosts = postsCount > 0;
 
 	return (
@@ -28,7 +31,7 @@ const Page: NextPage = async () => {
 										<h2 className='text-xl md:text-2xl font-medium mb-2'>{title}</h2>
 										<p className='text-base md:text-lg'>{content}</p>
 									</div>
-									<DeletePost id={id} />
+									<DeletePost id={id || ''} />
 								</Link>
 							</li>
 						))}

@@ -1,5 +1,5 @@
 import { deletePost, editPost } from '@/actions';
-import prisma from '@/prisma/client';
+import { Prisma } from '@prisma/client';
 import { NextPage } from 'next';
 import { notFound } from 'next/navigation';
 
@@ -10,7 +10,9 @@ interface Params {
 }
 
 export async function generateStaticParams(): Promise<Params[]> {
-	const posts = await prisma.post.findMany();
+	const posts = (await fetch(`${process.env.BASE_URL}/api/posts`).then((data) =>
+		data.json()
+	)) as Prisma.PostCreateInput[];
 	return posts.map(({ slug }) => ({ slug }));
 }
 
@@ -20,14 +22,16 @@ interface Props {
 
 const Page: NextPage<Props> = async ({ params }) => {
 	const { slug } = await params;
-	const post = await prisma.post.findUnique({ where: { slug } });
+	const post = (await fetch(`${process.env.BASE_URL}/api/posts/${slug}`).then((data) =>
+		data.json()
+	)) as Prisma.PostCreateInput;
 
 	if (!post) {
 		notFound();
 	}
 
-	const editPostById = editPost.bind(null, post?.id || '');
-	const deletePostById = deletePost.bind(null, post?.id || '', true);
+	const editPostById = editPost.bind(null, post.slug);
+	const deletePostById = deletePost.bind(null, post.slug, true);
 
 	return (
 		<div>
