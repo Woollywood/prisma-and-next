@@ -31,15 +31,6 @@ export default function RootLayout({
 						<Link href='/' className='text-4xl md:text-6xl font-medium'>
 							Logo
 						</Link>
-						<nav>
-							<ul>
-								<li>
-									<Link href='/posts' className='text-2xl md:text-4xl font-medium'>
-										Posts
-									</Link>
-								</li>
-							</ul>
-						</nav>
 					</header>
 					{children}
 				</div>

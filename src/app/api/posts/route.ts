@@ -7,6 +7,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
 	const { data } = (await request.json()) as { data: { title: string; slug: string; content: string } };
+
 	return NextResponse.json(
 		await prisma.post.create({
 			data,
